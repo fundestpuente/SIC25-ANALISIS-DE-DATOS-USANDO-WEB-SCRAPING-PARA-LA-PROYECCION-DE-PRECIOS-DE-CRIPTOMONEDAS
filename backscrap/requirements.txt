@@ -1,0 +1,9 @@
+pip install pandas
+pip install streamlit
+
+pip install sse-starlette
+pip install broadcaster
+
+
+pip install sseclient
+pip install schedule
