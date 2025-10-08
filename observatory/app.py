@@ -17,7 +17,6 @@ st.set_page_config(
 st.title("📊 Crypto Market Observatory")
 st.caption("Datos integrados de CoinGecko y CoinMarketCap")
 
-# ========== FUNCIONES DE DATOS ==========
 
 @st.cache_data(ttl=60) # Cachea los datos por 60 segundos
 def load_data():
@@ -79,7 +78,6 @@ def display_sidebar(df: pd.DataFrame):
     )
     return selected_sources
 
-# ========== LÓGICA PRINCIPAL ==========
 
 df_raw = load_data()
 
@@ -200,7 +198,6 @@ else:
                     - **Uso**: Es ideal para observar tendencias, patrones y la volatilidad de los precios a lo largo de las diferentes capturas de datos.
                     """)
 
-# ========== ESTILO PERSONALIZADO ==========
 st.markdown(
     """
     <style>

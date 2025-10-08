@@ -10,7 +10,6 @@ from backscrap.app.utils.broadcaster import broadcast_startup, broadcast_shutdow
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manejador del ciclo de vida de la aplicación."""
-    # Inicio: Inicializa los recursos (por ejemplo, conexión a MongoDB)
     mongo_manager = MongoManagerCriptoScrapping.getInstance()
     print("Conexión a MongoDB inicializada.")
     #   inicia el SSE event

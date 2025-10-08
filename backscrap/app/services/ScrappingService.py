@@ -42,14 +42,13 @@ class ScrappingService:
                 result_df = scraper_func(page, **kwargs)
                 return result_df
         except PlaywrightError as e:
-            # Captura errores específicos de Playwright (ej. timeouts)
+            # Captura errores específicos
             Console.error(f"Error de Playwright en {url}: {e}")
             return pd.DataFrame(columns=self.COL_NAMES)
         except Exception as e:
             Console.error(f"Error inesperado en la función de scraping para {url}: {e}")
             return pd.DataFrame(columns=self.COL_NAMES)
 
-    # --- Funciones de Scraping Específicas (privadas) ---
 
     def _scrape_coingecko(self) -> pd.DataFrame:
         """Lógica de scraping para CoinGecko."""
