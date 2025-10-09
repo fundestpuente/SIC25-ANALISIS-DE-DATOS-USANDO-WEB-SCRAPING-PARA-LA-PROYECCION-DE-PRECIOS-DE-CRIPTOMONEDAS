@@ -6,11 +6,9 @@ from backscrap.app.pojo.enums.enumslist import ListaOperadoresCondicionales
 from backscrap.app.utils.Global import Console
 
 class MongoManager:
-    """Clase base genérica para manejar conexiones a MongoDB."""
     _instance = None
 
     def __init__(self, mongo_uri, db_name):
-        """Inicializa la conexión a MongoDB."""
         if not mongo_uri or not db_name:
             raise ValueError("Se deben proporcionar la URI y el nombre de la base de datos.")
         self.mongo_uri = mongo_uri
@@ -18,7 +16,6 @@ class MongoManager:
         self.db = self.client[db_name]
 
     async def close_connection(self):
-        """Cierra explícitamente la conexión a MongoDB."""
         if self.client:
             self.client.close()
             print("Conexión a MongoDB cerrada.")
@@ -51,7 +48,6 @@ class MongoManager:
             return None
     
     async def actualizar(self, collection_name, document_id, document_data):
-        """Actualiza un documento en la colección especificada."""
         collection = self.db[collection_name]
 
         # Verificar si el documento existe
@@ -132,7 +128,6 @@ class MongoManager:
         mongo_operator: ListaOperadoresCondicionales,
         valor: Any = None
     ) -> List[dict]:
-        """Recupera documentos de la colección especificada según una condición."""
         query = {}
 
         if campo == "_id":

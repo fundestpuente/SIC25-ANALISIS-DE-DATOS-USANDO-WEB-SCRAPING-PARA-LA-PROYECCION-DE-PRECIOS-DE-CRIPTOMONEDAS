@@ -96,8 +96,6 @@ def display_sidebar(df: pd.DataFrame) -> List[str]:
     return selected_sources
 
 
-# ===== MAIN LOGIC =====
-
 df_raw = load_data()
 
 if df_raw.empty:
@@ -277,7 +275,6 @@ else:
                         """
                     )
 
-# ===== CUSTOM STYLE (kept as in original, only comments translated) =====
 st.markdown(
     """
     <style>

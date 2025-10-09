@@ -46,9 +46,11 @@ except Exception:  # noqa: BLE001
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI) -> AsyncIterator[None]:
-    """App lifespan: start/stop shared resources without changing logic."""
-    # Connect SSE broadcaster if available
+async def lifespan(app: FastAPI):
+    """Manejador del ciclo de vida de la aplicación."""
+    mongo_manager = MongoManagerCriptoScrapping.getInstance()
+    print("Conexión a MongoDB inicializada.")
+    #   inicia el SSE event
     await broadcast_startup()
     # Warm up Mongo singleton if present (do not fail if not available)
     if MongoManagerCriptoScrapping is not None:
