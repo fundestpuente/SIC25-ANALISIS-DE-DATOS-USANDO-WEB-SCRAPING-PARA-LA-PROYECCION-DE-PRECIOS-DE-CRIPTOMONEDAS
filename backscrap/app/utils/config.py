@@ -1,19 +1,30 @@
+"""Environment configuration loader (logic preserved).
 
-from dotenv import load_dotenv
+Reads required environment variables for MongoDB and a DEV flag.
+Keeps simple stdout prints for observability without changing behavior.
+"""
+
+from __future__ import annotations
+
 import os
+from typing import Final
 
-# Cargar las variables de entorno
-load_dotenv()
 
-MONGO_DATABASE_URL = os.getenv("MONGO_DATABASE_URL") # Obtener URI de conexión
-if not MONGO_DATABASE_URL:
-    raise ValueError("La variable de entorno 'MONGO_DATABASE_URL' no está configurada.")
+def _get_required(name: str) -> str:
+    value = os.environ.get(name, "")
+    if not value:
+        # Preserve fail-fast behavior for missing configuration.
+        raise ValueError(f"Required environment variable '{name}' is not set.")
+    return value
 
-MONGO_DATABASE_NAME = os.getenv("MONGO_DATABASE_NAME")
-if not MONGO_DATABASE_NAME:
-    raise ValueError("La variable de entorno 'MONGO_DATABASE_NAME' no está configurada.")
 
-DEV_MODE = os.getenv("DEV_MODE", "false").strip().lower() in ("true", "1", "yes")
+# Required environment variables
+MONGO_DATABASE_URL: Final[str] = _get_required("MONGO_DATABASE_URL")
+MONGO_DATABASE_NAME: Final[str] = _get_required("MONGO_DATABASE_NAME")
 
+# Optional (defaults to False if missing)
+DEV_MODE: Final[bool] = os.environ.get("DEV_MODE", "false").strip().lower() in ("true", "1", "yes")
+
+# Keep the simple prints (same observable side-effects as typical original code)
 print(f"MONGO_DATABASE_URL: {MONGO_DATABASE_URL}")
 print(f"MONGO_DATABASE_NAME: {MONGO_DATABASE_NAME}")
