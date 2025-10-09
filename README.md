@@ -113,6 +113,4 @@ observatory/             # Streamlit UI for exploratory analysis
 docs/                    # Additional documentation generated from the codebase
 ```
 
-> This README intentionally reflects **only** what is present in the repository. Configuration and commands are derived from the existing files without external assumptions.
-
 ---
