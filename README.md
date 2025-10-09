@@ -42,6 +42,7 @@ Our prototype proposes a **lightweight stack** that automates data ingestion (we
 
 ### 4.2 Clone and create a virtual environment
 ```bash
+git clone <your-repo-url>
 cd SIC25-ANALISIS-DE-DATOS-USANDO-WEB-SCRAPING-PARA-LA-PROYECCION-DE-PRECIOS-DE-CRIPTOMONEDAS
 
 # Create & activate a virtualenv (Linux/macOS)
@@ -139,9 +140,5 @@ observatory/   # Streamlit dashboard for exploratory analysis
 docs/          # Extended documentation (quick start, runbook, SSE events, etc.)
 ```
 
-<<<<<<< Updated upstream
----
-=======
 ### Responsible‑use note
 This project **does not provide investment recommendations** and does not promote buying cryptocurrencies. It is strictly **educational** and **data‑literacy oriented**: it helps users access **traceable and understandable** public information so they can **evaluate it on their own**.
->>>>>>> Stashed changes
