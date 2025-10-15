@@ -18,7 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Optional imports — do not fail if module paths differ in the project.
 try:
     from backscrap.app.utils.broadcaster import broadcast_startup, broadcast_shutdown
-except Exception:  # noqa: BLE001
+except ImportError:
     async def broadcast_startup() -> None:  # type: ignore[no-redef]
         return None
 
@@ -28,7 +28,7 @@ except Exception:  # noqa: BLE001
 try:
     # If your project exposes a singleton that initializes Mongo, touch it at startup.
     from backscrap.app.datasource.MongoManagerCriptoScrapping import MongoManagerCriptoScrapping
-except Exception:  # noqa: BLE001
+except ImportError:
     MongoManagerCriptoScrapping = None  # type: ignore[assignment]
 
 
@@ -36,12 +36,12 @@ except Exception:  # noqa: BLE001
 # If your modules use different names, only adjust these two import lines.
 try:
     from backscrap.app.controller.ScrappingController import router as scrapping_router
-except Exception:  # noqa: BLE001
+except ImportError:
     scrapping_router = None  # type: ignore[assignment]
 
 try:
     from backscrap.app.controller.ServerEventsController import router as sse_router
-except Exception:  # noqa: BLE001
+except ImportError:
     sse_router = None  # type: ignore[assignment]
 
 
@@ -56,7 +56,7 @@ async def lifespan(app: FastAPI):
     if MongoManagerCriptoScrapping is not None:
         try:
             MongoManagerCriptoScrapping.getInstance()
-        except Exception:
+        except Exception: # noqa: BLE001
             # Keep silent to avoid altering observable behavior in non-Mongo flows
             pass
     try:
@@ -96,7 +96,7 @@ async def health() -> dict:
 
 # Mount routers only if they were imported successfully
 if scrapping_router is not None:
-    app.include_router(scrapping_router, prefix="/api/scraping", tags=["scraping"])
+    app.include_router(scrapping_router)
 
 if sse_router is not None:
-    app.include_router(sse_router, prefix="/api/events", tags=["events"])
+    app.include_router(sse_router)
